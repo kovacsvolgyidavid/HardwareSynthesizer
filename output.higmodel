@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ASCII"?>
+<higModel:HIG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:higModel="http://hls.iit.bme.hu/hig" name="graph">
+  <nodes xsi:type="higModel:ComplexNode" name="cluster_0">
+    <ports xsi:type="higModel:InputPort" outEdges="//@nodes.0/@innerGraph/@edges.0" name="x_0">
+      <attributes value="x" key="portname"/>
+      <attributes value="InputPort" key="class"/>
+      <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+    </ports>
+    <ports xsi:type="higModel:OutputPort" inEdge="//@nodes.0/@innerGraph/@edges.1" name="xx_1">
+      <attributes value="xx" key="portname"/>
+      <attributes value="OutputPort" key="class"/>
+      <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+    </ports>
+    <attributes value="ComplexNode" key="class"/>
+    <attributes value="penwidth=&quot;2.0&quot;bgcolor=&quot;#ffffff&quot;" key="style"/>
+    <innerGraph name="graph">
+      <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@innerGraph/@nodes.0/@ports.0" sourcePort="//@nodes.0/@ports.0">
+        <attributes value="link" key="class"/>
+        <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+      </edges>
+      <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@ports.1" sourcePort="//@nodes.0/@innerGraph/@nodes.0/@ports.1">
+        <attributes value="link" key="class"/>
+        <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+      </edges>
+      <nodes xsi:type="higModel:LoopNode" name="cluster_1" tripCount="5">
+        <ports xsi:type="higModel:InputPort" inEdge="//@nodes.0/@innerGraph/@edges.0" outEdges="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.0" name="in1_2">
+          <attributes value="in1" key="portname"/>
+          <attributes value="InputPort" key="class"/>
+          <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+        </ports>
+        <ports xsi:type="higModel:OutputPort" inEdge="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.3" outEdges="//@nodes.0/@innerGraph/@edges.1" name="out2_3">
+          <attributes value="out2" key="portname"/>
+          <attributes value="OutputPort" key="class"/>
+          <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+        </ports>
+        <attributes value="LoopNode" key="class"/>
+        <attributes value="penwidth=&quot;2.0&quot;bgcolor=&quot;#ffd600&quot;" key="style"/>
+        <innerGraph name="graph">
+          <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.1/@ports.0" sourcePort="//@nodes.0/@innerGraph/@nodes.0/@ports.0">
+            <attributes value="link" key="class"/>
+            <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+          </edges>
+          <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.3/@ports.1" sourcePort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.1/@ports.2">
+            <attributes value="link" key="class"/>
+            <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+          </edges>
+          <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.1/@ports.1" sourcePort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.2/@ports.0">
+            <attributes value="link" key="class"/>
+            <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+          </edges>
+          <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@innerGraph/@nodes.0/@ports.1" sourcePort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.3/@ports.2">
+            <attributes value="link" key="class"/>
+            <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+          </edges>
+          <edges xsi:type="higModel:IDataLink" targetPort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.3/@ports.0" sourcePort="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@nodes.0/@ports.0">
+            <attributes value="link" key="class"/>
+            <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+          </edges>
+          <nodes xsi:type="higModel:Const" name="const_0" value="1">
+            <ports xsi:type="higModel:OutputPort" outEdges="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.4" name="out_0">
+              <attributes value="out" key="portname"/>
+              <attributes value="OutputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <attributes value="1" key="value"/>
+            <attributes value="Const" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#ffffff&quot;, fontcolor=&quot;#000000&quot;, label=&quot;1&quot;, dsfas=&quot;&lt;id>&quot;" key="style"/>
+          </nodes>
+          <nodes xsi:type="higModel:Merge" name="phi_0">
+            <ports xsi:type="higModel:InputPort" inEdge="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.0" name="in0_1">
+              <attributes value="in0" key="portname"/>
+              <attributes value="InputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <ports xsi:type="higModel:InputPort" inEdge="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.2" name="in1_2">
+              <attributes value="in1" key="portname"/>
+              <attributes value="InputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <ports xsi:type="higModel:OutputPort" outEdges="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.1" name="out_3">
+              <attributes value="out" key="portname"/>
+              <attributes value="OutputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <attributes value="phi" key="type"/>
+            <attributes value="Merge" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#bfbfbf&quot;" key="style"/>
+          </nodes>
+          <nodes xsi:type="higModel:Const" name="const_1" value="1">
+            <ports xsi:type="higModel:OutputPort" outEdges="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.2" name="out_4">
+              <attributes value="out" key="portname"/>
+              <attributes value="OutputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <attributes value="1" key="value"/>
+            <attributes value="Const" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#ffffff&quot;, fontcolor=&quot;#000000&quot;, label=&quot;1&quot;, dsfas=&quot;&lt;id>&quot;" key="style"/>
+          </nodes>
+          <nodes xsi:type="higModel:ElementaryOp" name="add_1">
+            <ports xsi:type="higModel:InputPort" inEdge="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.4" name="in1_5">
+              <attributes value="in1" key="portname"/>
+              <attributes value="InputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <ports xsi:type="higModel:InputPort" inEdge="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.1" name="in2_6">
+              <attributes value="in2" key="portname"/>
+              <attributes value="InputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <ports xsi:type="higModel:OutputPort" outEdges="//@nodes.0/@innerGraph/@nodes.0/@innerGraph/@edges.3" name="out_7">
+              <attributes value="out" key="portname"/>
+              <attributes value="OutputPort" key="class"/>
+              <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+            </ports>
+            <attributes value="add" key="type"/>
+            <attributes value="ElementaryOp" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#79B30F&quot;, label=&quot;add&quot;" key="style"/>
+          </nodes>
+        </innerGraph>
+      </nodes>
+    </innerGraph>
+  </nodes>
+</higModel:HIG>

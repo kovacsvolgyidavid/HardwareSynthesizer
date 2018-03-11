@@ -11,5 +11,7 @@ class Architecture implements Serializable{
     List<VhdlEntity> components;
     List<Const> constants;
     Set<Signal> signals;
+    List<EntityMap> childModuleMappings;
+    EntityMap selfMapping; 
     String body;
 }

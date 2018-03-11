@@ -7,7 +7,7 @@ import hu.bme.iit.hls.hig.HigModel.Port;
 
 public class HIGUtility {
 	public static final int BIT_WIDTH = 32;
-
+	public static final String SIGNAL_PREFIX = "signal_";
 	public static int getBitWidth() {
 		// TODO Auto-generated method stub
 		return BIT_WIDTH;

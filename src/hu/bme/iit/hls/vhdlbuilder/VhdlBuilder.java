@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import hu.bme.iit.hls.entities.Architecture;
 import hu.bme.iit.hls.entities.Signal;
@@ -26,36 +25,17 @@ public class VhdlBuilder {
 	private VhdlManager vhdlManager = new VhdlManager();
 
 	public Vhdl buildVhdl(ComplexNode node) {
-		 	Vhdl vhdl= new Vhdl();
+		 	Vhdl vhdl= vhdlManager.getVhdl(node);
 			vhdl.setIncludes(createIncludes(node));
-			vhdl.setArchitecture(createArchitecture(node));
+			vhdl.setArchitecture(buildArchitecture(node));
+			vhdlManager.enablePrint(vhdl);
 			return vhdl;
 		
 	}
 
-	private Architecture createArchitecture(ComplexNode node) {
-		Architecture arch = new Architecture();
-		List<VhdlEntity> components = new ArrayList<>();
-		for (Object higNode : Utility.filterList(node.getInnerGraph().getNodes(), Const.class, true)) {
-			components.add(vhdlManager.getVhdl((Node) higNode).getEntity());
-		}
-		arch.setComponents(components);
-		List<Const> constants = new ArrayList<>();
-		Utility.filterList(node.getInnerGraph().getNodes(), Const.class, false).forEach(e -> constants.add((Const) e));
-		arch.setConstants(constants);
-		Set<Signal> signals = new HashSet<>();
-		node.getInnerGraph().getEdges().forEach(k -> signals.add(createSignal(k, HIGUtility.getBitWidth())));
-		arch.setSignals(signals);
-		arch.setBody(ComplexBuild.buildBody(node));
-		return arch;
-	}
-
-	private Signal createSignal(Edge k, int bitWidth) {
-		PortEdge edge=(PortEdge)k;
-		Signal signal = new Signal();
-		signal.setBitWidth(bitWidth);
-		signal.setName(edge.getSourcePort().getName());
-		return signal;
+	private Architecture buildArchitecture(ComplexNode node) {
+		ArchitectureBuilder builder = new ArchitectureBuilder(vhdlManager);
+		return builder.buildArchitecture(node);		
 	}
 
 	private String createIncludes(ComplexNode node) {

@@ -11,4 +11,5 @@ class VhdlPort implements Serializable{
     String name;
     int bitWidth;
     InOut inOut;
+    Signal connectedSignal;
 }

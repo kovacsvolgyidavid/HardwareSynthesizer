@@ -17,32 +17,26 @@ public class VhdlManager {
 
 	public Vhdl getVhdl(Node node) {
 		Vhdl vhdl;
-		if (!lib.hasVhdl(node.getName())) {
-			vhdl = buildVhdlFromNode(node);
+		if(node instanceof ElementaryOp){//Elementary operation esetén aktiválja a VHDL-t
+			ElementaryOp elem=(ElementaryOp)node;
+			vhdl=lib.getVhdl(elem.getOpType().getName());
+		}
+		else {
+		if (!lib.hasVhdl(node.getName())) {	//ha nincs a VHDL Library-ben kreál egy új VHDL-t
+			vhdl = createVhdlFromNode(node);
 			lib.addVhdl(node.getName(),vhdl);
-			enablePrint(vhdl);
 			Logger.getLogger("").log(Level.INFO, node.getName() + " added to VHDL Library");
 		} else {
 			vhdl = lib.getVhdl(node.getName());
 		}
+		}
 		return vhdl;
 	}
 
-	private Vhdl buildVhdlFromNode(Node node) {
-		Vhdl vhdl;
-		VhdlBuilder builder=new VhdlBuilder();
-		if(node instanceof LoopNode){
-			vhdl=builder.buildVhdl((LoopNode)node);
-		}else{if(node instanceof ComplexNode){
-			vhdl=builder.buildVhdl((ComplexNode)node);
-		}else{if(node instanceof ElementaryOp){
-			vhdl=builder.buildVhdl((ElementaryOp)node);
-		}else{
-			throw new IllegalArgumentException(node.getClass().getName()+"Type of node is not supported yet.");
-		}}}
-		if(vhdl.getEntity()==null){
+	private Vhdl createVhdlFromNode(Node node) {
+		Vhdl vhdl=new Vhdl();
 		vhdl.setEntity(EntityBuilder.buildEntity(node));
-		}
+		ComplexNode n= (ComplexNode) node;
 		return vhdl;
 	}
 
@@ -63,9 +57,6 @@ public class VhdlManager {
 		if (!lib.enableOperation(name)) {
 			throw new IllegalArgumentException("No vhdl found with name:" + name + ".");
 		}
-		if(!name.equals(node.getName())){
-			
-		}
 	}
 
 	public void removeVhdl(ElementaryOp node) {
@@ -76,7 +67,7 @@ public class VhdlManager {
 		lib.addSimple(name);
 		
 	}
-	private void enablePrint(Vhdl vhdl) {
+	public void enablePrint(Vhdl vhdl) {
 		try {
 			if (vhdl.getEntity() != null && vhdl.getArchitecture() != null) {
 

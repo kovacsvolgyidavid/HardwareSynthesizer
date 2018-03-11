@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ASCII"?>
+<higModel:HigModelRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:higModel="http://hls.iit.bme.hu/hig">
+  <hig name="graph">
+    <nodes xsi:type="higModel:ComplexNode" name="cluster_0">
+      <ports xsi:type="higModel:InputPort" outEdges="//@hig/@nodes.0/@innerGraph/@edges.0 //@hig/@nodes.0/@innerGraph/@edges.1" name="x_0">
+        <attributes value="x" key="portname"/>
+        <attributes value="InputPort" key="class"/>
+        <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+      </ports>
+      <ports xsi:type="higModel:OutputPort" inEdge="//@hig/@nodes.0/@innerGraph/@edges.2" name="y2_1">
+        <attributes value="y2" key="portname"/>
+        <attributes value="OutputPort" key="class"/>
+        <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+      </ports>
+      <attributes value="ComplexNode" key="class"/>
+      <attributes value="penwidth=&quot;2.0&quot;bgcolor=&quot;#ffffff&quot;" key="style"/>
+      <innerGraph name="graph">
+        <edges xsi:type="higModel:DataLink" targetPort="//@hig/@nodes.0/@innerGraph/@nodes.0/@ports.0" sourcePort="//@hig/@nodes.0/@ports.0">
+          <attributes value="link" key="class"/>
+          <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+        </edges>
+        <edges xsi:type="higModel:DataLink" targetPort="//@hig/@nodes.0/@innerGraph/@nodes.0/@ports.1" sourcePort="//@hig/@nodes.0/@ports.0">
+          <attributes value="link" key="class"/>
+          <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+        </edges>
+        <edges xsi:type="higModel:DataLink" targetPort="//@hig/@nodes.0/@ports.1" sourcePort="//@hig/@nodes.0/@innerGraph/@nodes.0/@ports.2">
+          <attributes value="link" key="class"/>
+          <attributes value="nullstyle=&quot;solid&quot;" key="style"/>
+        </edges>
+        <nodes xsi:type="higModel:ElementaryOp" name="add_0" opType="//@operationTypes.0">
+          <ports xsi:type="higModel:InputPort" inEdge="//@hig/@nodes.0/@innerGraph/@edges.0" name="in1_2">
+            <attributes value="in1" key="portname"/>
+            <attributes value="InputPort" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+          </ports>
+          <ports xsi:type="higModel:InputPort" inEdge="//@hig/@nodes.0/@innerGraph/@edges.1" name="in2_3">
+            <attributes value="in2" key="portname"/>
+            <attributes value="InputPort" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+          </ports>
+          <ports xsi:type="higModel:OutputPort" outEdges="//@hig/@nodes.0/@innerGraph/@edges.2" name="out_4">
+            <attributes value="out" key="portname"/>
+            <attributes value="OutputPort" key="class"/>
+            <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#b0de5c&quot;, shape=&quot;circle&quot;" key="style"/>
+          </ports>
+          <attributes value="add" key="type"/>
+          <attributes value="ElementaryOp" key="class"/>
+          <attributes value="penwidth=&quot;0.5&quot;, color=&quot;#000000&quot;, shape=&quot;box&quot;, style=&quot;filled&quot;fillcolor=&quot;#79B30F&quot;, label=&quot;add&quot;" key="style"/>
+        </nodes>
+      </innerGraph>
+    </nodes>
+  </hig>
+  <operationTypes name="add"/>
+  <operationTypes name="buf"/>
+</higModel:HigModelRoot>

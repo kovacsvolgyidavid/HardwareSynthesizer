@@ -12,7 +12,7 @@ import hu.bme.iit.hls.entities.Vhdl;
 import hu.bme.iit.hls.entities.VhdlEntity;
 import hu.bme.iit.hls.entities.VhdlPort;
 import hu.bme.iit.hls.hig.HigModel.Const;
-
+//USE TEMPLATE, GO EOF
 public class BasicEntityReader {
 	public List<Vhdl> getBasicOperitons(File source) {
 		List<Vhdl> basics = new ArrayList<>();
@@ -62,3 +62,34 @@ public class BasicEntityReader {
 		return basics;
 	}
 }
+/*TEMPLATE FOR BASIC OPERATIONS
+ * 		Vhdl vhdl_VHDLNAME = new Vhdl();
+		basics.add(vhdl1);
+		String includes_VHDLNAME = "library IEEE;\nuse IEEE.STD_LOGIC_1164.ALL;\nuse ieee.std_logic_unsigned.all;";
+		vhdl_VHDLNAME.setIncludes(includes_VHDLNAME);
+		VhdlEntity entity_VHDLNAME = new VhdlEntity();
+		entity_VHDLNAME.setName("add");
+		List<VhdlPort> ports_VHDLNAME = new ArrayList<>();
+		VhdlPort port_VHDLNAME1 = new VhdlPort();
+		VhdlPort port_VHDLNAME2 = new VhdlPort();
+		VhdlPort port_VHDLNAME3 = new VhdlPort();
+		port_VHDLNAME1.setBitWidth(32);
+		port_VHDLNAME1.setInOut(InOut.IN);
+		port_VHDLNAME1.setName("Input1");
+		port_VHDLNAME2.setBitWidth(32);
+		port_VHDLNAME2.setInOut(InOut.IN);
+		port_VHDLNAME2.setName("Input2");
+		port_VHDLNAME3.setBitWidth(32);
+		port_VHDLNAME3.setInOut(InOut.OUT);
+		port_VHDLNAME3.setName("Output1");
+		ports_VHDLNAME.add(port_VHDLNAME1);
+		ports_VHDLNAME.add(port_VHDLNAME2);
+		ports_VHDLNAME.add(port_VHDLNAME3);
+		entity_VHDLNAME.setPorts(ports_VHDLNAME);
+		vhdl_VHDLNAME.setEntity(entity_VHDLNAME);
+		Architecture arch_VHDLNAME = new Architecture();
+		arch_VHDLNAME.setBody("");
+		vhdl_VHDLNAME.setArchitecture(arch_VHDLNAME);
+		arch_VHDLNAME.setComponents(new ArrayList<VhdlEntity>());
+		arch_VHDLNAME.setSignals(new HashSet<Signal>());
+		arch_VHDLNAME.setConstants(new ArrayList<Const>());*/
