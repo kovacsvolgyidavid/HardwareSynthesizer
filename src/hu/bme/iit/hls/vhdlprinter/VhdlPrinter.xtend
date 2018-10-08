@@ -1,18 +1,20 @@
 package hu.bme.iit.hls.vhdlprinter
 
+import hu.bme.iit.hls.entities.Architecture
 import hu.bme.iit.hls.entities.Vhdl
 import hu.bme.iit.hls.entities.VhdlEntity
 import hu.bme.iit.hls.utility.HIGUtility
 
 class VhdlPrinter {
     def static String getIncludes() {
-        '''library IEEE;
+        '''
+library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;'''
     }
 
     def static String printVhdl(Vhdl vhdl) {
         '''
-            «vhdl.includes»
+            «includes»
             «vhdl.printEntity»
             «vhdl.printArchitecture»
         '''
@@ -39,9 +41,9 @@ use IEEE.STD_LOGIC_1164.ALL;'''
 
     def static printArchitecture(Vhdl vhdl) {
         '''
-            «val arch=vhdl.architecture»
+            «val arch= new Architecture»
             architecture Behavioral of «vhdl.entity.name» is
-            «FOR comp : arch.components»
+            «FOR comp : arch.componentSet»
                 component «comp.name» is
                 Port(
                     «comp.printPorts»
@@ -54,10 +56,21 @@ use IEEE.STD_LOGIC_1164.ALL;'''
              «ENDFOR»
              «FOR signal : arch.signals»
                 signal «signal.name» : STD_LOGIC_VECTOR («signal.bitWidth-1» downto 0);
-                «ENDFOR»
+             «ENDFOR»
+             «var entityNumber = 0»
+             «FOR instance : arch.components»
+                component_«entityNumber++»: «instance.entity.name» port map(«FOR port : instance.entity.ports SEPARATOR " ,"»«instance.portMap.get(port).name»«ENDFOR» )
+             «ENDFOR»                
             «arch.body»
             end Behavioral;
         '''
+    }
+
+    def static instantiatingEntity(VhdlEntity entity, int entityNumber) {
+        '''
+        
+        '''
+
     }
 
     def static toBit(int input, int bitwidth) {
@@ -69,4 +82,5 @@ use IEEE.STD_LOGIC_1164.ALL;'''
         }
         return leadingZerosBuilder.append(inputString);
     }
+
 }

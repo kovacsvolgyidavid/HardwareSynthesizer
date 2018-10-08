@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import hu.bme.iit.hls.hig.HigModel.ComplexNode;
-import hu.bme.iit.hls.hig.HigModel.ElementaryOp;
+import hu.bme.iit.hls.hig.HigModel.LoopNode;
 import hu.bme.iit.hls.hig.HigModel.util.HigModelSwitch;
 import hu.bme.iit.hls.vhdlbuilder.VhdlBuilder;
 
@@ -20,10 +20,11 @@ public class HIGProcessor {
 				return object;
 			}
 
-			public Object caseElementaryOp(ElementaryOp object) {
+			public Object caseLoopNode(LoopNode object) {
 				builder.buildVhdl(object);
 				return object;
 			}
+			
 		};
 		for (Iterator iter = EcoreUtil.getAllContents(Collections.singleton(eobject)); iter.hasNext();) {
 			EObject eObject = (EObject) iter.next();
@@ -31,7 +32,7 @@ public class HIGProcessor {
 		}
 	}
 
-	public void processHigtoVhdl(EObject eobject) {
+	public void processHig(EObject eobject) {
 		addToVhdlLibrary(eobject);
 	}
 }

@@ -9,5 +9,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class VhdlEntity implements Serializable{
     String name;
     List<Generic> generics=new ArrayList<Generic>();
-    List<VhdlPort>ports=new ArrayList<VhdlPort>();
+    List<VhdlPort>ports=new ArrayList<VhdlPort>();      
+    
 }

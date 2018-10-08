@@ -1,6 +1,6 @@
 package hu.bme.iit.hls.vhdl.simpleoperations
 
-import hu.bme.iit.hls.hig.HigModel.ElementaryOp
+import hu.bme.iit.hls.higmodel.ElementaryComp
 
 class SimpleOperationExpander {
 	def static expandOperation(String name,int inPort){

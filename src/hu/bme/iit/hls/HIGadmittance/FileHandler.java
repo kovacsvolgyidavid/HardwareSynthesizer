@@ -1,5 +1,6 @@
 package hu.bme.iit.hls.HIGadmittance;
 
+import java.nio.file.Path;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,22 +12,22 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 public class FileHandler {
-	public EList<EObject> loadAllData(String fileName) {
+	public EList<EObject> loadAllData(Path path) {
 
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("*", new XMIResourceFactoryImpl());
 
 		ResourceSet resSet = new ResourceSetImpl();
-		URI uri = URI.createFileURI(fileName);
+		URI uri = URI.createFileURI(path.toString());
 
 		Resource resource = resSet.getResource(uri, true);
 		return resource.getContents();
 	}
 
-	public EObject loadData(String fileName) {
+	public EObject loadData(Path path) {
 
-		return (EObject) loadAllData(fileName).get(0);
+		return (EObject) loadAllData(path).get(0);
 	}
 
 }

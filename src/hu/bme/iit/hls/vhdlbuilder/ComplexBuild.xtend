@@ -20,7 +20,7 @@ class ComplexBuild <T> {
             «var manager= new VhdlManager()»
             begin
                         «FOR node : new ComplexBuild().filterList(comp.innerGraph.nodes,Const,true)» «««példányosítás, portok összekötése
-                    «node.name»_«i++»: «manager.getVhdl(node).entity.name» port map(«node.mapPort»);«ENDFOR»
+                    «node.name»_«i++»: «manager.getEntity(node).name» port map(«node.mapPort»);«ENDFOR»
                        «FOR port : new ComplexBuild().filterList(comp.ports,InputPort,false)»
                            signal_«port.name»<=«comp.name»«port.name»;
                        «ENDFOR»

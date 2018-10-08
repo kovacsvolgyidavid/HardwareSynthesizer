@@ -17,5 +17,6 @@ class Signal implements Serializable{
         }else{
             return false;
         }
-    }
+    }  
+    
 }

@@ -5,9 +5,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hu.bme.iit.hls.entities.Vhdl;
+import hu.bme.iit.hls.entities.VhdlEntity;
 import hu.bme.iit.hls.hig.HigModel.ComplexNode;
 import hu.bme.iit.hls.hig.HigModel.ElementaryOp;
-import hu.bme.iit.hls.hig.HigModel.LoopNode;
 import hu.bme.iit.hls.hig.HigModel.Node;
 import hu.bme.iit.hls.library.VhdlLibrary;
 import hu.bme.iit.hls.library.VhdlLibraryEntry;
@@ -53,7 +53,7 @@ public class VhdlManager {
 		return lib.getAllVhdl();
 	}
 
-	public void addSimpleOperation(String name, Node node) {
+	public void enableSimpleOperation(String name) {
 		if (!lib.enableOperation(name)) {
 			throw new IllegalArgumentException("No vhdl found with name:" + name + ".");
 		}
@@ -67,16 +67,11 @@ public class VhdlManager {
 		lib.addSimple(name);
 		
 	}
-	public void enablePrint(Vhdl vhdl) {
-		try {
-			if (vhdl.getEntity() != null && vhdl.getArchitecture() != null) {
+	
+	public void enablePrint(Vhdl vhdl) {//TODO: Kitörölni
+	}
 
-				enableOperation(vhdl.getEntity().getName());
-			} else {
-				throw new IllegalArgumentException("Vhdl is not printable named: " + vhdl.getEntity().getName());
-			}
-		} catch (Exception e) {
-			Logger.getLogger(this.getClass().toString()).severe(e.toString());
-		}
+	public VhdlEntity getEntity(Node node) {
+	  return lib.getVhdl(node.getName()).getEntity();
 	}
 }
