@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ASCII"?>
+<higmodel:HigModelRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:higmodel="http://hls.iit.bme.hu/hig">
+  <hig name="root">
+    <inPorts xsi:type="higmodel:InputPort" name="in">
+      <attributes value="in" key="name"/>
+    </inPorts>
+    <outPorts xsi:type="higmodel:OutputPort" name="out">
+      <attributes value="out" key="name"/>
+    </outPorts>
+    <components xsi:type="higmodel:ElementaryComp" name="Add">
+      <inPorts xsi:type="higmodel:InputPort" name="in0">
+        <attributes value="in0" key="name"/>
+      </inPorts>
+      <inPorts xsi:type="higmodel:InputPort" name="in1">
+        <attributes value="in1" key="name"/>
+      </inPorts>
+      <outPorts xsi:type="higmodel:OutputPort" name="out">
+        <attributes value="out" key="name"/>
+      </outPorts>
+      <attributes value="2" key="duration"/>
+    </components>
+    <components xsi:type="higmodel:ElementaryComp" name="Assign">
+      <inPorts xsi:type="higmodel:InputPort" name="in0">
+        <attributes value="in0" key="name"/>
+      </inPorts>
+      <outPorts xsi:type="higmodel:OutputPort" name="out">
+        <attributes value="out" key="name"/>
+      </outPorts>
+      <attributes value="1" key="duration"/>
+    </components>
+    <components xsi:type="higmodel:ElementaryComp" name="Init">
+      <inPorts xsi:type="higmodel:InputPort" name="in0">
+        <attributes value="in0" key="name"/>
+      </inPorts>
+      <outPorts xsi:type="higmodel:OutputPort" name="out">
+        <attributes value="out" key="name"/>
+      </outPorts>
+      <attributes value="1" key="duration"/>
+    </components>
+    <components xsi:type="higmodel:ElementaryComp" name="LT">
+      <inPorts xsi:type="higmodel:InputPort" name="in0">
+        <attributes value="in0" key="name"/>
+      </inPorts>
+      <inPorts xsi:type="higmodel:InputPort" name="in1">
+        <attributes value="in1" key="name"/>
+      </inPorts>
+      <outPorts xsi:type="higmodel:OutputPort" name="out">
+        <attributes value="out" key="name"/>
+      </outPorts>
+      <attributes value="2" key="duration"/>
+    </components>
+    <components xsi:type="higmodel:HIG" name="vhdl_test_2">
+      <inPorts xsi:type="higmodel:InputPort" outEdges="//@hig/@components.4/@edges.1" name="sum">
+        <attributes value="sum" key="name"/>
+      </inPorts>
+      <outPorts xsi:type="higmodel:OutputPort" inEdge="//@hig/@components.4/@edges.5" name="ret">
+        <attributes value="ret" key="name"/>
+      </outPorts>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@outPorts.0" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.0/@outPorts.0"/>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@inPorts.0" sourcePort="//@hig/@components.4/@inPorts.0"/>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@outPorts.1" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.1/@outPorts.0"/>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@inPorts.1" sourcePort="//@hig/@components.4/@nodes.1/@outPorts.0"/>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@outPorts.2" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.2/@outPorts.0"/>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@outPorts.0" sourcePort="//@hig/@components.4/@nodes.2/@outPorts.0"/>
+      <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@inPorts.2" sourcePort="//@hig/@components.4/@nodes.0/@outPorts.0"/>
+      <nodes name="init7">
+        <inPorts xsi:type="higmodel:InputPort" name="in" value="20">
+          <attributes value="in" key="name"/>
+        </inPorts>
+        <outPorts xsi:type="higmodel:OutputPort" outEdges="//@hig/@components.4/@edges.6" name="out">
+          <attributes value="out" key="name"/>
+        </outPorts>
+        <component xsi:type="higmodel:CompRef" ref="//@hig/@components.2"/>
+      </nodes>
+      <nodes name="assign8">
+        <inPorts xsi:type="higmodel:InputPort" name="in" value="0">
+          <attributes value="in" key="name"/>
+        </inPorts>
+        <outPorts xsi:type="higmodel:OutputPort" outEdges="//@hig/@components.4/@edges.3" name="out">
+          <attributes value="out" key="name"/>
+        </outPorts>
+        <component xsi:type="higmodel:CompRef" ref="//@hig/@components.1"/>
+      </nodes>
+      <nodes name="loop10node0">
+        <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@edges.1" name="d0" pair="//@hig/@components.4/@nodes.2/@component/@inPorts.0">
+          <attributes value="d0" key="name"/>
+        </inPorts>
+        <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@edges.3" name="d1" pair="//@hig/@components.4/@nodes.2/@component/@inPorts.1">
+          <attributes value="d1" key="name"/>
+        </inPorts>
+        <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@edges.6" name="x0" pair="//@hig/@components.4/@nodes.2/@component/@inPorts.2">
+          <attributes value="x0" key="name"/>
+        </inPorts>
+        <outPorts xsi:type="higmodel:OutputPort" outEdges="//@hig/@components.4/@edges.5" name="z1" pair="//@hig/@components.4/@nodes.2/@component/@outPorts.0">
+          <attributes value="z1" key="name"/>
+        </outPorts>
+        <component xsi:type="higmodel:LoopComp" name="loop10">
+          <inPorts xsi:type="higmodel:InputPort" name="d0_" pair="//@hig/@components.4/@nodes.2/@inPorts.0">
+            <attributes value="d0_" key="name"/>
+          </inPorts>
+          <inPorts xsi:type="higmodel:InputPort" name="d1_" pair="//@hig/@components.4/@nodes.2/@inPorts.1">
+            <attributes value="d1_" key="name"/>
+          </inPorts>
+          <inPorts xsi:type="higmodel:InputPort" name="x0_" pair="//@hig/@components.4/@nodes.2/@inPorts.2">
+            <attributes value="x0_" key="name"/>
+          </inPorts>
+          <outPorts xsi:type="higmodel:OutputPort" name="z1_" pair="//@hig/@components.4/@nodes.2/@outPorts.0">
+            <attributes value="z1_" key="name"/>
+          </outPorts>
+          <attributes value="5" key="tripCount"/>
+          <comp xsi:type="higmodel:HIG" name="hig9">
+            <inPorts xsi:type="higmodel:InputPort" outEdges="//@hig/@components.4/@nodes.2/@component/@comp/@edges.1 //@hig/@components.4/@nodes.2/@component/@comp/@edges.4" name="f0">
+              <attributes value="f0" key="name"/>
+            </inPorts>
+            <inPorts xsi:type="higmodel:InputPort" outEdges="//@hig/@components.4/@nodes.2/@component/@comp/@edges.0 //@hig/@components.4/@nodes.2/@component/@comp/@edges.3" name="f1">
+              <attributes value="f1" key="name"/>
+            </inPorts>
+            <inPorts xsi:type="higmodel:InputPort" outEdges="//@hig/@components.4/@nodes.2/@component/@comp/@edges.2" name="X0">
+              <attributes value="X0" key="name"/>
+            </inPorts>
+            <outPorts xsi:type="higmodel:OutputPort" inEdge="//@hig/@components.4/@edges.0" name="c">
+              <attributes value="c" key="name"/>
+            </outPorts>
+            <outPorts xsi:type="higmodel:OutputPort" inEdge="//@hig/@components.4/@edges.2" name="y0">
+              <attributes value="y0" key="name"/>
+            </outPorts>
+            <outPorts xsi:type="higmodel:OutputPort" inEdge="//@hig/@components.4/@edges.4" name="y1">
+              <attributes value="y1" key="name"/>
+            </outPorts>
+            <outPorts xsi:type="higmodel:OutputPort" inEdge="//@hig/@components.4/@nodes.2/@component/@comp/@edges.4" name="Z1" pair="//@hig/@components.4/@nodes.2/@outPorts.0">
+              <attributes value="Z1" key="name"/>
+            </outPorts>
+            <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.0/@inPorts.0" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@inPorts.1"/>
+            <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.1/@inPorts.0" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@inPorts.0"/>
+            <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.1/@inPorts.1" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@inPorts.2"/>
+            <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@nodes.2/@inPorts.0" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@inPorts.1"/>
+            <edges xsi:type="higmodel:DataLink" targetPort="//@hig/@components.4/@nodes.2/@component/@comp/@outPorts.3" sourcePort="//@hig/@components.4/@nodes.2/@component/@comp/@inPorts.0"/>
+            <nodes name="lT11">
+              <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@nodes.2/@component/@comp/@edges.0" name="in">
+                <attributes value="in" key="name"/>
+              </inPorts>
+              <inPorts xsi:type="higmodel:InputPort" name="in" value="5">
+                <attributes value="in" key="name"/>
+              </inPorts>
+              <outPorts xsi:type="higmodel:OutputPort" outEdges="//@hig/@components.4/@edges.0" name="out">
+                <attributes value="out" key="name"/>
+              </outPorts>
+              <component xsi:type="higmodel:CompRef" ref="//@hig/@components.3"/>
+            </nodes>
+            <nodes name="add12">
+              <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@nodes.2/@component/@comp/@edges.1" name="in">
+                <attributes value="in" key="name"/>
+              </inPorts>
+              <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@nodes.2/@component/@comp/@edges.2" name="in">
+                <attributes value="in" key="name"/>
+              </inPorts>
+              <outPorts xsi:type="higmodel:OutputPort" outEdges="//@hig/@components.4/@edges.2" name="out">
+                <attributes value="out" key="name"/>
+              </outPorts>
+              <component xsi:type="higmodel:CompRef" ref="//@hig/@components.0"/>
+            </nodes>
+            <nodes name="add13">
+              <inPorts xsi:type="higmodel:InputPort" inEdge="//@hig/@components.4/@nodes.2/@component/@comp/@edges.3" name="in">
+                <attributes value="in" key="name"/>
+              </inPorts>
+              <inPorts xsi:type="higmodel:InputPort" name="in" value="1">
+                <attributes value="in" key="name"/>
+              </inPorts>
+              <outPorts xsi:type="higmodel:OutputPort" outEdges="//@hig/@components.4/@edges.4" name="out">
+                <attributes value="out" key="name"/>
+              </outPorts>
+              <component xsi:type="higmodel:CompRef" ref="//@hig/@components.0"/>
+            </nodes>
+          </comp>
+        </component>
+      </nodes>
+    </components>
+  </hig>
+</higmodel:HigModelRoot>

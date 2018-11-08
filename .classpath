@@ -12,5 +12,12 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ECORE library"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/hu.bme.iit.hls.higmodel"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.9.4/jackson-dataformat-xml-2.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.4/jackson-core-2.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.4/jackson-databind-2.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.9.4/jackson-module-jaxb-annotations-2.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Egyetem/.m2/repository/com/fasterxml/woodstox/woodstox-core/5.0.3/woodstox-core-5.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

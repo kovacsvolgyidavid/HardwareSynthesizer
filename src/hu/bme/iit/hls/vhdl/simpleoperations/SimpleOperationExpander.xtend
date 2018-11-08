@@ -1,7 +1,5 @@
 package hu.bme.iit.hls.vhdl.simpleoperations
 
-import hu.bme.iit.hls.higmodel.ElementaryComp
-
 class SimpleOperationExpander {
 	def static expandOperation(String name,int inPort){
 	'''
@@ -36,12 +34,12 @@ class SimpleOperationExpander {
 	end Behavioral;
 	'''
 }
-def static String buildOperationBody(ElementaryOp node,Cascade cascade){
-    '''
-    begin
-       «FOR c:cascade»
-            «node.getOpType().getName() + cascade.getIteration»: «node.getOpType().getName()» port map(«c.nextInput»,«c.nextInput»,«c.nexOutput»);
-       «ENDFOR»
-    out1<=«cascade.nextInput»;
-    '''}
+//def static String buildOperationBody(ElementaryOp node,Cascade cascade){
+//    '''
+//    begin
+//       «FOR c:cascade»
+//            «node.getOpType().getName() + cascade.getIteration»: «node.getOpType().getName()» port map(«c.nextInput»,«c.nextInput»,«c.nexOutput»);
+//       «ENDFOR»
+//    out1<=«cascade.nextInput»;
+//    '''}
 }

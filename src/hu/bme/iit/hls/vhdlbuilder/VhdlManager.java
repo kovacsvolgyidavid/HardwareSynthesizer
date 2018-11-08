@@ -1,77 +1,59 @@
 package hu.bme.iit.hls.vhdlbuilder;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 import hu.bme.iit.hls.entities.Vhdl;
-import hu.bme.iit.hls.entities.VhdlEntity;
-import hu.bme.iit.hls.hig.HigModel.ComplexNode;
-import hu.bme.iit.hls.hig.HigModel.ElementaryOp;
-import hu.bme.iit.hls.hig.HigModel.Node;
+import hu.bme.iit.hls.higmodel.CompRef;
+import hu.bme.iit.hls.higmodel.Component;
 import hu.bme.iit.hls.library.VhdlLibrary;
-import hu.bme.iit.hls.library.VhdlLibraryEntry;
 
 public class VhdlManager {
 	private static VhdlLibrary lib = VhdlLibrary.getInstance();
 
-	public Vhdl getVhdl(Node node) {
-		Vhdl vhdl;
-		if(node instanceof ElementaryOp){//Elementary operation esetén aktiválja a VHDL-t
-			ElementaryOp elem=(ElementaryOp)node;
-			vhdl=lib.getVhdl(elem.getOpType().getName());
+	public Vhdl getVhdl(Component comp) {
+		Component workingComp = comp;
+		if (comp instanceof CompRef) {
+			workingComp = ((CompRef) comp).getRef();
 		}
-		else {
-		if (!lib.hasVhdl(node.getName())) {	//ha nincs a VHDL Library-ben kreál egy új VHDL-t
-			vhdl = createVhdlFromNode(node);
-			lib.addVhdl(node.getName(),vhdl);
-			Logger.getLogger("").log(Level.INFO, node.getName() + " added to VHDL Library");
+		String name = workingComp.getName();
+		if (lib.hasVhdl(name)) {
+			return lib.getVhdl(name);
 		} else {
-			vhdl = lib.getVhdl(node.getName());
+			Vhdl vhdl = createVhdl(name, workingComp);
+			lib.addVhdl(name, vhdl);
+			return vhdl;
 		}
-		}
+
+	}
+
+	private Vhdl createVhdl(String name, Component workingComp) {
+		Optional<Vhdl> dynamicVhdl = new DynamicVhdlBuilder().createDynamicVhdl(name);
+		Vhdl vhdl = dynamicVhdl.orElse(createBasicVhdl(workingComp, name));
+		vhdl.setVhdlFile(createTempFile(name));
 		return vhdl;
 	}
 
-	private Vhdl createVhdlFromNode(Node node) {
-		Vhdl vhdl=new Vhdl();
-		vhdl.setEntity(EntityBuilder.buildEntity(node));
-		ComplexNode n= (ComplexNode) node;
+	private File createTempFile(String name) {	
+		return Paths.get("output",name+ ".vhd").toFile();
+	}
+
+	private Vhdl createBasicVhdl(Component comp, String name) {
+		Vhdl vhdl = new Vhdl(EntityBuilder.buildEntity(comp));
 		return vhdl;
 	}
 
 	public Vhdl getVhdl(String name) {
-		return lib.getVhdl(name);
-	}
-
-	public void importVhdl(String name) {
-		lib.addSimple(name);
-	}
-
-	public List<VhdlLibraryEntry> getAllVhdl() {
-		// TODO Auto-generated method stub
-		return lib.getAllVhdl();
-	}
-
-	public void enableSimpleOperation(String name) {
-		if (!lib.enableOperation(name)) {
-			throw new IllegalArgumentException("No vhdl found with name:" + name + ".");
+		if (lib.hasVhdl(name)) {
+			return lib.getVhdl(name);
+		} else {
+			Optional<Vhdl> dynamicVhdl = new DynamicVhdlBuilder().createDynamicVhdl(name);
+			dynamicVhdl.ifPresent(k->lib.addVhdl(name, k));			
+			return dynamicVhdl.get();
 		}
 	}
 
-	public void removeVhdl(ElementaryOp node) {
-		lib.removeVhdl(node.getName());
-	}
-
-	public void enableOperation(String name) {
-		lib.addSimple(name);
-		
-	}
-	
-	public void enablePrint(Vhdl vhdl) {//TODO: Kitörölni
-	}
-
-	public VhdlEntity getEntity(Node node) {
-	  return lib.getVhdl(node.getName()).getEntity();
-	}
 }

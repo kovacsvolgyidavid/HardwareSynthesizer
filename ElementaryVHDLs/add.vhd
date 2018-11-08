@@ -23,7 +23,7 @@ ARCHITECTURE Behavioral OF add IS
 			clk : IN std_logic;
 			input1 : IN BOOLEAN;
 			input2 : IN BOOLEAN;
-			output : OUT BOOLEAN
+			output1 : OUT BOOLEAN
 		);
 	END COMPONENT;
 	SIGNAL start_signal : BOOLEAN;

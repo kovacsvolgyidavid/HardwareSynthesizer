@@ -4,8 +4,6 @@ import java.util.List;
 
 import hu.bme.iit.hls.entities.Signal;
 import hu.bme.iit.hls.entities.VhdlEntity;
-import hu.bme.iit.hls.hig.HigModel.Const;
-
 public class PreprocessedNode {
 	List<VhdlEntity> components;
 	VhdlEntity entity;

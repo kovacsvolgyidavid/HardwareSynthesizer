@@ -50,10 +50,10 @@ use IEEE.STD_LOGIC_1164.ALL;'''
                        );
                 end component;
              «ENDFOR»
-             «FOR con : arch.constants»
-                «val bitwidth=HIGUtility.bitWidth»
-                constant «con.name» : STD_LOGIC_VECTOR («bitwidth-1» downto 0):="«toBit(Integer.parseInt(con.value),bitwidth)»";
-             «ENDFOR»
+«««             «FOR con : arch.components»
+«««                «val bitwidth=HIGUtility.bitWidth»
+«««                constant «con.name» : STD_LOGIC_VECTOR («bitwidth-1» downto 0):="«toBit(Integer.parseInt(con.value),bitwidth)»";
+«««             «ENDFOR»
              «FOR signal : arch.signals»
                 signal «signal.name» : STD_LOGIC_VECTOR («signal.bitWidth-1» downto 0);
              «ENDFOR»
