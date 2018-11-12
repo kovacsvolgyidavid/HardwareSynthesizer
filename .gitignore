@@ -3,3 +3,5 @@ bin/*
 xtend-gen/*
 lib/*
 output/
+
+input/
