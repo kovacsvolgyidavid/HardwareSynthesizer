@@ -28,5 +28,9 @@ public class SourceBuilder {
 		vc.setBitWidth(32);
 		return vc;
 	}
+	
+	public VhdlConstant createConstant(String constant) {
+		return createConstant(new BigInteger(constant));
+	}
 
 }

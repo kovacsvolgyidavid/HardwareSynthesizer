@@ -16,4 +16,5 @@ class VhdlEntity implements Serializable{
         name + generics.toString + ports.toString()
     }
     
+    
 }
