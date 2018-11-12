@@ -44,8 +44,11 @@ class HIGPrinter {
                 «node.name»: «preprocessor.getEntity(node.component).name» port map(«PrintUtils.vhdlInstanceAppendants»«IF !ports.empty», «ENDIF»«FOR port : ports  SEPARATOR ", "»«sourceMap.get(port)?.name», «sourceMap.get(port)?.name»_rdy«ENDFOR» );
              «ENDFOR»
             «FOR inputPort : hig.inPorts»
-                «sourceMap.get(inputPort).name»<=«inputPort?.name»;
+            «var source = sourceMap.get(inputPort)»
+            «IF source !=null»
+                «source.name»<=«inputPort?.name»;
                 «sourceMap.get(inputPort).name»_rdy<=«inputPort?.name»_rdy;
+            «ENDIF»
             «ENDFOR»
             «FOR outputPort : hig.outPorts»
                «outputPort.name»<=«sourceMap.get(outputPort)?.name»;

@@ -37,12 +37,20 @@ class LoopVhdlPrinter {
             «ENDFOR»
             begin
             signal_rst <= rst or loop_rst;
-            signal_clk <= clk;           
+            signal_clk <= clk;
+            «FOR port : loop.inPorts»
+            «signalMap.get(port).name»<=«port.name»;
+            «signalMap.get(port).name»_rdy<=«port.name»_rdy;                 
+            «ENDFOR»
+            «FOR port : loop.outPorts»
+            «port.name»<=«signalMap.get(port).name»; 
+            «port.name»_rdy<=«signalMap.get(port).name»_rdy;               
+            «ENDFOR»             
             loop_component: «loop.comp.name» PORT MAP(
             signal_rst, signal_loop_rst, signal_clk,
             «FOR port : comp.inPorts SEPARATOR ", "»«signalMap.get(port).name»,«signalMap.get(port).name»_rdy«ENDFOR»
             «IF comp.inPorts.size>0», «ENDIF»signal_c, signal_c_rdy«IF comp.outPorts.size>1», «ENDIF»
-            «FOR port : comp.outPorts.stream.filter(k|!"c".equals(k.name)).collect(Collectors.toList) SEPARATOR ", "»
+            «FOR port : comp.outPorts.stream.filter(k|!k.name.startsWith("c")).collect(Collectors.toList) SEPARATOR ", "»
             «signalMap.get(port).name», «signalMap.get(port).name»_rdy
             «ENDFOR»);
             «FOR i:0..<loop.inPorts.stream.filter(k|k.name.startsWith("d")).count.intValue»
@@ -53,7 +61,6 @@ class LoopVhdlPrinter {
                 «signalMap.get(comp.inPorts.get(i)).name», «signalMap.get(comp.inPorts.get(i)).name»_rdy
                 );
             «ENDFOR»
-            );  
             «var entityOutPorts = entity.ports.stream.filter(k|k.inOut.equals(InOut.OUT) && k.bitWidth>1).collect(Collectors.toList)»
             «var outPorts = loop.outPorts.stream.filter(k|k.name.startsWith("z")).collect(Collectors.toList)»           
              loop_process : PROCESS (clk, signal_rst)
@@ -62,11 +69,14 @@ class LoopVhdlPrinter {
                              VARIABLE buffer_«port.name» : «PrintUtils.printType(port)»;
                              «ENDFOR»
                          BEGIN
+             «var compInputs = comp.outPorts.stream.filter(k|!k.name.toLowerCase.startsWith("c")).collect(Collectors.toList)»
                          IF rising_edge(signal_rst) THEN
                                     is_loop_finished:= false;
+                                    «FOR port : outPorts»
+                                    «port.name»_rdy<=false;
+                                    «ENDFOR»
                                  ELSIF falling_edge(signal_rst) THEN
                                              --do nothing
-                                 «var compInputs = comp.outPorts.stream.filter(k|!k.name.toLowerCase.startsWith("c")).collect(Collectors.toList)»            
                                  ELSIF signal_c_rdy«IF compInputs.size>0» AND «ENDIF»«FOR port: compInputs SEPARATOR " AND "»«signalMap.get(port).name»_rdy«ENDFOR» THEN --loop minden kimenete kész-e?
                                  IF signed(signal_c) > to_signed(0, 32) THEN
                                      «FOR port : entityOutPorts»

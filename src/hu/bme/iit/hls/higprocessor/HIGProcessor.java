@@ -3,8 +3,6 @@ package hu.bme.iit.hls.higprocessor;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
@@ -19,10 +17,13 @@ import com.google.common.collect.Sets;
 import hu.bme.iit.hls.entities.Vhdl;
 import hu.bme.iit.hls.higmodel.HIG;
 import hu.bme.iit.hls.higmodel.HigModelRoot;
+import hu.bme.iit.hls.higmodel.InputPort;
 import hu.bme.iit.hls.higmodel.LoopComp;
 import hu.bme.iit.hls.higmodel.Node;
+import hu.bme.iit.hls.higmodel.Port;
+import hu.bme.iit.hls.higmodel.SelCase;
+import hu.bme.iit.hls.higmodel.SelComp;
 import hu.bme.iit.hls.higmodel.util.HigModelSwitch;
-import hu.bme.iit.hls.utility.TempFileHandler;
 import hu.bme.iit.hls.vhdlbuilder.VhdlBuilder;
 import hu.bme.iit.hls.vhdlbuilder.VhdlManager;
 
@@ -62,6 +63,21 @@ public class HIGProcessor {
 				}				
 				return super.caseLoopComp(loop);
 			}
+			
+			
+
+			@Override
+			public Object caseSelComp(SelComp sel) {
+				Set<Vhdl> components = sel.getCases().stream().map(SelCase::getComp).map(manager::getVhdl).collect(Collectors.toSet());
+				Vhdl vhdl = manager.getVhdl(sel);
+				vhdl.setComponentsList(components);				
+				try(OutputStream outputStream=Files.newOutputStream(vhdl.getVhdlFile().toPath())) {
+					builder.buildVhdl(sel, outputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}	
+				return super.caseSelComp(sel);
+			}
 
 			private Set<Vhdl> getLoopComponents(LoopComp loop) {
 				Vhdl mainComponent = manager.getVhdl(loop.getComp());
@@ -78,7 +94,37 @@ public class HIGProcessor {
 	}
 
 	public Vhdl processHigModellRoot(HigModelRoot higModellRoot) {	
+		prepareHig(higModellRoot);
 		addToVhdlLibrary(higModellRoot);
 		return null;
+	}
+
+	private void prepareHig(EObject eobject) {
+		HigModelSwitch<Object> visitor = new HigModelSwitch<Object>() {
+			int i = 0;
+			@Override
+			public Object casePort(Port object) {
+				String name = object.getName().replaceAll("[^a-zA-Z\\d\\s:]*", "");
+				String newName;
+				Stream <String> exceptions = Stream.of("in");
+				if(name.matches("^\\d.*") || exceptions.anyMatch(k->k.equals(name))){
+					newName = createPortName(object)+i++;
+				}else{
+					newName=name;
+				}
+				object.setName(newName);
+				
+				return super.casePort(object);
+			}
+			private String createPortName(Port object) {
+				// TODO Auto-generated method stub
+				return object instanceof InputPort ? "input":"output";
+			}
+			
+		};
+		for (Iterator iter = EcoreUtil.getAllContents(Collections.singleton(eobject)); iter.hasNext();) {
+			EObject eObject = (EObject) iter.next();
+			visitor.doSwitch(eObject);
+		}
 	}
 }
