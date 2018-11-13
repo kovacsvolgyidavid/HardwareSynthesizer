@@ -47,17 +47,24 @@ class SelCompPrinter {
         proc : process (clk)
         begin
         if «selectionPort.name»_rdy  then
-        «FOR cas: sel.cases»
-        if «FOR selector:cas.selectors»signed(«selectionPort.name») = «selectorMap.get(selector)?.name»«ENDFOR» then
-        output6<=signal_out1;
-        output6_rdy<=signal_out1_rdy;
+        if «FOR cas: sel.cases.stream.filter(k|k.selectors.stream.allMatch(p|!"def".equals(p.value))).collect(Collectors.toList) SEPARATOR " elseif "»
+        «FOR selector:cas.selectors.stream.filter(k|!"def".equals(k.value)).collect(Collectors.toList)»signed(«selectionPort.name») = «selectorMap.get(selector)?.name»«ENDFOR» then
+        «FOR int j : 0..sel.outPorts.size-1»  
+        «sel.outPorts.get(j).name»<=«outputMap.get(cas.comp.outPorts.get(j)).name»;
+        «sel.outPorts.get(j).name»_rdy<=«outputMap.get(cas.comp.outPorts.get(j)).name»_rdy;
+        «ENDFOR»
         «ENDFOR»
         else 
-        output6<=signal_out2;
-        output6_rdy<=signal_out2_rdy;
+        «var defaultCase= sel.cases.stream.filter(k|k.selectors.stream.anyMatch(p|"def".equals(p.value))).findFirst.orElse(null)»
+        «FOR int j : 0..sel.outPorts.size-1»  
+                «sel.outPorts.get(j).name»<=«outputMap.get(defaultCase.comp.outPorts.get(j)).name»;
+                «sel.outPorts.get(j).name»_rdy<=«outputMap.get(defaultCase.comp.outPorts.get(j)).name»_rdy;
+        «ENDFOR»
         end if;
         else
-        output6_rdy<=false;
+        «FOR port : sel.outPorts»
+        «port.name»_rdy<=false;
+        «ENDFOR»
         end if;
         end process;
         end Behavioral;
