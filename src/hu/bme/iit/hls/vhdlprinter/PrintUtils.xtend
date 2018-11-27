@@ -42,7 +42,6 @@ use IEEE.Numeric_STD.all;
     }
 
     def static printType(VhdlPort port) {
-
         '''
             «IF port.bitWidth==1»
                 «port.vhdlPortType»
