@@ -41,13 +41,13 @@ class SelCompPrinter {
         «ENDFOR»
         begin
         «FOR cas:sel.cases»
-        case«i++»: «manager.getVhdl(cas.comp).name» PORT MAP(rst, loop_rst, clk, «entity.printInputs», «printOutputs(outputMap,cas)»);
+        case«i++»: «manager.getVhdl(cas.comp).name» PORT MAP(«entity.printInputs», «printOutputs(outputMap,cas)»);
         «ENDFOR»
         «var selectionPort = sel.inPorts.get(0)»
         proc : process (clk)
         begin
         if «selectionPort.name»_rdy  then
-        if «FOR cas: sel.cases.stream.filter(k|k.selectors.stream.allMatch(p|!"def".equals(p.value))).collect(Collectors.toList) SEPARATOR " elseif "»
+        if «FOR cas: sel.cases.stream.filter(k|k.selectors.stream.allMatch(p|!"def".equals(p.value))).collect(Collectors.toList) SEPARATOR " elsif "»
         «FOR selector:cas.selectors.stream.filter(k|!"def".equals(k.value)).collect(Collectors.toList)»signed(«selectionPort.name») = «selectorMap.get(selector)?.name»«ENDFOR» then
         «FOR int j : 0..sel.outPorts.size-1»  
         «sel.outPorts.get(j).name»<=«outputMap.get(cas.comp.outPorts.get(j)).name»;
