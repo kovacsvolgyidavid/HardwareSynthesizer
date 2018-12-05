@@ -14,6 +14,7 @@ public class VhdlBuilder {
 	
 	public void buildVhdl(HIG hig, OutputStream is){
 		String vhdlText = HIGPrinter.printVhdl(hig);
+		System.out.println(vhdlText);
 		try {
 			is.write(vhdlText.getBytes());
 		} catch (IOException e) {
@@ -32,7 +33,6 @@ public class VhdlBuilder {
 
 	public void buildVhdl(SelComp sel, OutputStream os) {
 		String vhdlText = SelCompPrinter.printVhdl(sel);
-		System.out.println(vhdlText);
 		try {
 			os.write(vhdlText.getBytes());
 		} catch (IOException e) {
